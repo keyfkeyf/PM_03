@@ -24,6 +24,11 @@ namespace src
        
             static void Main(string[] args)
         {
+            int n;
+            Console.WriteLine("Введите размер массива");
+            n = Convert.ToInt32(Console.ReadLine());
+            Subject[] mas = new Subject[n];
+           
         }
     }
 }

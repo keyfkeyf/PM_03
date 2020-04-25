@@ -41,15 +41,24 @@ namespace src
             {
                 Console.WriteLine("Введите размер массива");
                 n = Convert.ToInt32(Console.ReadLine());
-                if (n==0) { Console.WriteLine("Массив не может быть пустым"); }
+                if (n==0 || n<0) { Console.WriteLine("Массив не может быть пустым, а также не может содержать отрицательное количество элементов"); }
             }
 
-            while (n == 0);
+            while (n == 0 || n<0);
           
       
 
             Create(n);
+            //foreach (Subject s in Plan)
+            //{
+            //   Console.Write(s.name + "; " + s.surname + "; " + s.semester.ToString());
+            //}
             Sort();
+            //Console.Write("Отсортированный массив");
+            //foreach (Subject s in Plan)
+            //{
+            //    Console.Write(s.name + "; " + s.surname + "; " + s.semester.ToString());
+            //}
             Write();
 
 
@@ -74,10 +83,10 @@ namespace src
                     {
                         Console.WriteLine("Введите семестр");
                         sub.semester = Convert.ToInt32(Console.ReadLine());
-                        if (sub.semester == 0) { Console.WriteLine("Нет такого семестра."); }
+                        if (sub.semester == 0 || sub.semester < 0) { Console.WriteLine("Нет такого семестра (не бывает отрицательных и нулевых)"); }
                     }
 
-                    while (sub.semester == 0);
+                    while (sub.semester == 0 || sub.semester < 0);
 
                     
                     Plan.Add(sub);

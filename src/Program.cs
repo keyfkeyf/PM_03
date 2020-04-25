@@ -24,53 +24,92 @@ namespace src
         {
             this.name = "";
             this.surname = "";
-            this.semester = 0;
+            this.semester = 1;
         }
 
     }
 
 
-    public  class Mass
-    {
-      
-        public static Subject[] Create(Subject[] plan, int n)
-        {
-            //Subject[] plan = new Subject[n];
-            for (int i = 0; i < n; i++)
-            {
-                plan[i] = new Subject();
-
-                Console.WriteLine("Введите название предмета");
-                plan[i].name = Console.ReadLine();
-                //do
-                //{
-                //} while ();
-
-                Console.WriteLine("Введите фамилию преподавателя");
-                plan[i].surname = Console.ReadLine();
-                Console.WriteLine("Введите семестр");
-                plan[i].semester = Convert.ToInt32(Console.ReadLine());
-
-            }
-           
-            return plan;
-        }
-
-
-    }
+   
     class Program
         {
-
+        static public List<Subject>  Plan =  new List<Subject>();
         static void Main(string[] args)
         {
             int n;
-            Console.WriteLine("Введите размер массива");
-            n = Convert.ToInt32(Console.ReadLine());
+            do
+            {
+                Console.WriteLine("Введите размер массива");
+                n = Convert.ToInt32(Console.ReadLine());
+                if (n==0) { Console.WriteLine("Массив не может быть пустым"); }
+            }
+
+            while (n == 0);
           
-          
+      
+
+            Create(n);
+            Sort();
+            Write();
+
+
             Console.ReadKey();
         }
-      
+
+        public static void Create(int n)
+        {
+
+            for (int i = 0; i < n; i++)
+            {
+                try
+                {
+                    Subject sub = new Subject();
+                    Console.WriteLine("Предмет"+ " "+ (i+1).ToString());
+                    Console.WriteLine("Введите название предмета");
+                    sub.name = Console.ReadLine();
+                   Console.WriteLine("Введите фамилию преподавателя");
+                        sub.surname = Console.ReadLine();
+                   
+                    do
+                    {
+                        Console.WriteLine("Введите семестр");
+                        sub.semester = Convert.ToInt32(Console.ReadLine());
+                        if (sub.semester == 0) { Console.WriteLine("Нет такого семестра."); }
+                    }
+
+                    while (sub.semester == 0);
+
+                    
+                    Plan.Add(sub);
+                }
+
+
+                catch (Exception)
+                {
+                    Console.WriteLine("Некорректные данные");
+                }
+            }
+
+}
+
+public static void Sort()
+        {
+            Plan.Sort((first, second) => string.Compare(first.semester.ToString(), second.name));
+        }
+
+        public static void Write()
+        {
+            using (StreamWriter w = new StreamWriter("Plane.txt"))
+            {
+                foreach (Subject s in Plan)
+                    w.WriteLine(s.name + "; " +s.surname + "; " + s.semester.ToString());
+            }
+
+            Console.WriteLine("Данные записаны!");
+        
+            
+        }
+
 
     }
 }

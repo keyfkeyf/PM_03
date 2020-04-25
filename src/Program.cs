@@ -108,7 +108,7 @@ public static void Sort()
 
         public static void Write()
         {
-            using (StreamWriter w = new StreamWriter("Plane.txt"))
+            using (StreamWriter w = new StreamWriter("Предметы.txt"))
             {
                 foreach (Subject s in Plan)
                     w.WriteLine(s.name + "; " +s.surname + "; " + s.semester.ToString());
